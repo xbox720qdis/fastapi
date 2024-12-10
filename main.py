@@ -1,9 +1,25 @@
 from uuid import UUID
 from typing import List
-from models import User, Gender, Role
+from models import User, Gender, Role, Product
 from fastapi import FastAPI, HTTPException
 
 app = FastAPI()
+
+db_products: List[Product]= [
+    Product(
+        id= 1,
+        name= "cocanbcvedsg",
+        price= "10.99"
+    ),
+     Product(
+        id= 2,
+        name= "mAnGo",
+        price= "11.99"
+    )
+]
+
+
+
 
 db: List[User] = [
    User(
@@ -21,6 +37,9 @@ db: List[User] = [
         roles=[Role.admin, Role.user]
     )
 ]
+
+#create product list
+
 @app.get("/")
 async def root():
     return {"hello": "mundo"}  
@@ -46,4 +65,8 @@ async def delete_user(user_id: UUID):
         detail=f"user with id: {user_id} does not exist"
     )
 
-        
+# create CRUD operation to product
+
+@app.get("/api/v1/products")
+async def fetch_products():
+    return db_products

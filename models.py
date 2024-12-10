@@ -19,3 +19,12 @@ class User(BaseModel):
     middle_name: Optional[str] = None  # Optional field with a default value
     gender: Gender
     roles: List[Role]
+
+
+#we need to creqate a product
+
+class Product(BaseModel):
+    id: int 
+    name: str
+    price: float
+    
