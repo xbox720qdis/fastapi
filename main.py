@@ -9,12 +9,16 @@ db_products: List[Product]= [
     Product(
         id= 1,
         name= "cocanbcvedsg",
-        price= "10.99"
+        price= 10.99,
+        description= "hhjueiw",
+        quantity= 1
     ),
      Product(
         id= 2,
         name= "mAnGo",
-        price= "11.99"
+        price= 11.99,
+        description= "gaswdyu",
+        quantity= 3
     )
 ]
 
@@ -70,3 +74,24 @@ async def delete_user(user_id: UUID):
 @app.get("/api/v1/products")
 async def fetch_products():
     return db_products
+
+@app.post("/api/v1/products")
+async def create_product(product: Product):
+    db_products.append(product)
+
+    print("ryueu")
+
+@app.delete("/api/v1/products/{product_id}")
+async def delete_product(product_id: int ):
+        for p in db_products:
+            print("elemento", p)
+            print(product_id)
+            if p.id == product_id:
+                db_products.remove(p)
+                return 
+        raise HTTPException(
+            status_code=404,
+            detail=f"product with id: {product_id} does not exist"
+        )
+
+    

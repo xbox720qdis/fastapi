@@ -27,4 +27,5 @@ class Product(BaseModel):
     id: int 
     name: str
     price: float
-    
+    description: Optional[str] = None 
+    quantity: int
